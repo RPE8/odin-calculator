@@ -55,6 +55,7 @@ main {
   font-size: 25px;
   font-weight: bold;
   display: grid;
+  grid-template-rows: 1fr 1fr;
   align-items: center;
   justify-items: end;
 }
