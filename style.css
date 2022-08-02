@@ -47,7 +47,6 @@ main {
   margin: 0;
   border: 0;
   display: block;
-  /* min-width: var(--button-width); */
 }
 
 .button.clear {
