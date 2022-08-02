@@ -1,13 +1,17 @@
 :root {
-  --page-background-color: #76ba99;
-  --calculator-background-color: #876445;
-  --calculator-box-shadow-color: #876445;
-  --buttons-background-color: #eddfb3;
-  --buttons-box-shadow-color: #e4cf8c;
-  --buttons-color: #876445;
-  --display-background-color: #eddfb3;
-  --display-color: #876445;
-  --button-clear-line-background-color: #76ba99;
+  --color-1: #76ba99;
+  --color-2: #876445;
+  --color-3: #eddfb3;
+  --color-4: #746842;
+  --page-background-color: var(--color-1);
+  --calculator-background-color: var(--color-2);
+  --calculator-box-shadow-color: var(--color-2);
+  --buttons-background-color: var(--color-3);
+  --buttons-box-shadow-color: var(--color-4);
+  --buttons-color: var(--color-2);
+  --display-background-color: var(--color-3);
+  --display-color: var(--color-2);
+  --button-clear-line-background-color: var(--color-1);
 }
 
 *,
