@@ -1,8 +1,11 @@
 :root {
   --page-background-color: #76ba99;
   --calculator-background-color: #876445;
+  --calculator-box-shadow-color: #876445;
   --buttons-background-color: #eddfb3;
-  --display-color: #76ba99;
+  --buttons-box-shadow-color: #e4cf8c;
+  --display-background-color: #ca955c;
+  --display-color: #eddfb3;
 }
 
 *,
@@ -25,8 +28,7 @@ body {
 }
 
 main {
-  max-width: 800px;
-  width: 600px;
+  width: 500px;
 }
 
 #calculator {
@@ -35,6 +37,7 @@ main {
   flex-direction: column;
   border: #876445 2px solid;
   background-color: var(--calculator-background-color);
+  box-shadow: var(--calculator-box-shadow-color) 0px 1px 4px;
   padding: 5px;
 }
 
@@ -42,8 +45,12 @@ main {
   height: 80px;
   border: #876445 2px solid;
   color: var(--display-color);
+  background-color: var(--display-background-color);
   font-size: 25px;
   font-weight: bold;
+  display: grid;
+  align-items: center;
+  justify-items: end;
 }
 
 #buttons {
@@ -59,6 +66,7 @@ main {
   border: 0;
   display: block;
   background-color: var(--buttons-background-color);
+  box-shadow: var(--buttons-box-shadow-color) 0px 1px 4px;
 }
 
 .button.clear {
