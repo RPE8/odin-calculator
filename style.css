@@ -1,3 +1,6 @@
+:root {
+}
+
 *,
 *::after,
 *::before {
@@ -10,4 +13,43 @@
 
 body {
   height: 100vh;
+  background-color: antiquewhite;
+}
+
+main {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#calculator {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: #876445 2px solid;
+  padding: 5px;
+}
+
+#display {
+  height: 50px;
+  border: #876445 2px solid;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(60px, 1fr));
+  grid-template-rows: repeat(5, minmax(60px, 80px));
+}
+
+.button {
+  margin: 0;
+  border: 0;
+  display: block;
+  /* min-width: var(--button-width); */
+}
+
+.button.clear {
+  grid-column: span 2;
 }
