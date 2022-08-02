@@ -1,4 +1,8 @@
 :root {
+  --page-background-color: #76ba99;
+  --calculator-background-color: #876445;
+  --buttons-background-color: #eddfb3;
+  --display-color: #76ba99;
 }
 
 *,
@@ -13,7 +17,7 @@
 
 body {
   height: 100vh;
-  background-color: antiquewhite;
+  background-color: var(--page-background-color);
 }
 
 main {
@@ -29,16 +33,20 @@ main {
   display: flex;
   flex-direction: column;
   border: #876445 2px solid;
+  background-color: var(--calculator-background-color);
   padding: 5px;
 }
 
 #display {
   height: 50px;
   border: #876445 2px solid;
+  color: var(--display-color);
 }
 
 #buttons {
   display: grid;
+  margin-top: 5px;
+  gap: 5px;
   grid-template-columns: repeat(4, minmax(60px, 1fr));
   grid-template-rows: repeat(5, minmax(60px, 80px));
 }
@@ -47,6 +55,7 @@ main {
   margin: 0;
   border: 0;
   display: block;
+  background-color: var(--buttons-background-color);
 }
 
 .button.clear {
