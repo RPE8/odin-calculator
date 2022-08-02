@@ -7,6 +7,7 @@
   --buttons-color: #876445;
   --display-background-color: #eddfb3;
   --display-color: #876445;
+  --button-clear-line-background-color: #76ba99;
 }
 
 *,
@@ -44,8 +45,8 @@ main {
 
 #display {
   height: 80px;
-  border: #876445 2px solid;
   color: var(--display-color);
+  padding: 5px;
   background-color: var(--display-background-color);
   font-size: 25px;
   font-weight: bold;
@@ -59,7 +60,7 @@ main {
   margin-top: 5px;
   gap: 5px;
   grid-template-columns: repeat(4, minmax(60px, 1fr));
-  grid-template-rows: repeat(5, minmax(40px, 70px));
+  grid-template-rows: repeat(5, minmax(40px, 50px));
 }
 
 .button {
@@ -73,5 +74,17 @@ main {
 }
 
 .button.clear {
+  position: relative;
   grid-column: span 2;
+}
+
+.button.clear:before {
+  background-color: var(--button-clear-line-background-color);
+  display: block;
+  content: "";
+  height: 2px;
+  width: calc(100% - 10px);
+  position: absolute;
+  left: 5px;
+  top: 3px;
 }
