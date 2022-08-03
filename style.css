@@ -101,3 +101,7 @@ main {
 .button:hover {
   filter: brightness(0.9);
 }
+
+.button:hover.filler {
+  filter: none;
+}
