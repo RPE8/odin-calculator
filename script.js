@@ -1,10 +1,25 @@
 const buttons = document.querySelectorAll("button");
-const SPECIAL_START_WITH = "#";
 const previousOperand = document.getElementById("previous-operand");
 const currentOperand = document.getElementById("current-operand");
 const OPERATIONS = {
   "+": (op1, op2) => op1 + op2,
   "-": (op1, op2) => op1 - op2,
+  "/": (op1, op2) => op1 / op2,
+  "*": (op1, op2) => op1 * op2,
+};
+const SPECIALS = {
+  "#CE": () => {
+    clearLast();
+    updateVisual();
+  },
+  "#C": () => {
+    clearAll();
+    updateVisual();
+  },
+  "#EQ": () => {
+    compute();
+    updateVisual();
+  },
 };
 let operand1 = "";
 let operand2 = "";
@@ -12,51 +27,67 @@ let operator = "";
 
 function onButtonClick(event) {
   const value = event.target.getAttribute("data-js-value");
-  const operation = OPERATIONS[value];
-  const isOperation = Boolean(operation);
+  const isSpecial = SPECIALS[value];
+  const isOperation = OPERATIONS[value];
 
-  if (isOperation) {
-    if (operand1 && operand2) {
-      [operand2, operand1] = [operate(operator, operand2, operand1), ""];
-    } else {
-      [operand2, operator, operand1] = [operand1, value, ""];
+  if (isSpecial) {
+    SPECIALS[value]();
+  } else if (isOperation) {
+    if (operand1 === "") {
+      if (operand2) {
+        operator = value;
+        updateVisual();
+      }
+
+      return;
     }
+    if (operand2 !== "") compute();
+    operator = value;
+    operand2 = operand1;
+    operand1 = "";
+    updateVisual();
   } else {
-    operand1 += value;
+    if (value === "." && operand1.indexOf(".") !== -1) return;
+    operand1 = operand1.toString() + value.toString();
+    updateVisual();
   }
+}
+
+function updateVisual() {
+  currentOperand.textContent = operand1;
+  if (operator !== "") {
+    previousOperand.textContent = `${operand2} ${operator}`;
+  } else {
+    previousOperand.textContent = operand2;
+  }
+}
+
+function clearAll() {
+  operand2 = "";
+  operator = "";
+  operand1 = "";
 
   updateVisual();
 }
 
-function updateVisual() {
-  if (operand2 !== previousOperand.textContent) {
-    previousOperand.textContent = operand2;
-  }
-  if (operand1 !== currentOperand.textContent) {
-    currentOperand.textContent = operand1;
-  }
+function clearLast() {
+  operand1 = operand1.toString().slice(0, -1);
 }
 
-function handleSpecial(value) {
-  switch (value) {
-    case "#CE": {
-      console.log("remove last");
-      break;
-    }
-    case "#C": {
-      console.log("remove all");
-      break;
-    }
-    default: {
-      console.log(`Unhandled special: ${value}`);
-      break;
-    }
-  }
+function compute() {
+  const result = operate(operator, operand2, operand1);
+  operand2 = "";
+  operator = "";
+  operand1 = result;
 }
 
 function operate(op, operand1, operand2) {
   const fnOperation = OPERATIONS[op];
-  return fnOperation ? fnOperation(+operand1, +operand2) : "ERROR";
+  return fnOperation && !isNaN(operand1) && !isNaN(operand2)
+    ? fnOperation(parseFloat(operand1), parseFloat(operand2))
+    : 0;
 }
 
 buttons.forEach((button) => button.addEventListener("click", onButtonClick));
+
+clearAll();
